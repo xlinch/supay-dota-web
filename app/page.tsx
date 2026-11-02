@@ -23,7 +23,8 @@ function balance(players:Player[], count:number, captains:Player[], respectRoles
   if(failed)continue;
   const pool=remaining.sort(()=>Math.random()-.5);
   for(const p of pool){
-   const options:Array<{t:Team;i:number;role:Role|'Flex'}>=ts.flatMap((t,i)=>{
+   const options:Array<{t:Team;i:number;role:Role|'Flex'}>=ts.flatMap(
+  (t,i): Array<{t:Team;i:number;role:Role|'Flex'}> => {
     if(t.slots.length>=5)return [];
     if(!respectRoles)return [{t,i,role:'Flex' as const}];
     const used=t.slots.map(s=>s.role);const r=slotRoles.find(role=>p.roles.includes(role)&&slotRoles.filter(x=>x===role).length>used.filter(x=>x===role).length);
